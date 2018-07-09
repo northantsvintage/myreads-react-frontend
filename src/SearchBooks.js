@@ -1,5 +1,5 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import ListBooks from './ListBooks'
 
 class SearchBooks extends React.Component {
     state = {
@@ -11,7 +11,11 @@ class SearchBooks extends React.Component {
        */
       showSearchPage: false
     }
-  
+    
+    // getall
+    // update
+    // search
+
     render() {
       return (
         <div className="search-books">

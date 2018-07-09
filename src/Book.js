@@ -1,16 +1,13 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
 
 class Book extends React.Component {
     state = {
      
       
     }
-    // move method
-    // currentlyReading
-    // wantToRead
-    // read
-    // none
+  
+
+    
     render() {
       return (
         <div className="book">
