@@ -1,60 +1,57 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
-import SearchBooks from './SearchBooks'
-import ListBooks from './ListBooks'
 import './App.css'
-
+import ListBooks from './ListBooks'
+import SearchBooks from './SearchBooks'
+import { Route } from 'react-router-dom'
+ 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    // move method
-    // currentlyReading
-    // wantToRead
-    // read
     books: [],
     currentlyReading: [],
     wantToRead: [],
     read: []
   }
 
-  updateShelf = (book, shelf) => {
-    console.log('update shelf');
-    BooksAPI.update(book, shelf).then((books) => {
-      this.listBooks();
-    })
+  componentDidMount(){
+    this.listBookShelf()
   }
 
-  listBooks() {
+  // listBookShelf is populating changed state from API
+  listBookShelf(){
     BooksAPI.getAll().then((books) => {
-      this.setState({
-        books: books,
-        currentlyReading: books.filter((book) => book.shelf === 'currentlyReading'),
-        wantToRead: books.filter((book) => book.shelf === 'wantToRead'),
-        read: books.filter((book) => book.shelf === 'read')
+        this.setState({ 
+          books:books,
+          currentlyReading: books.filter((book) => book.shelf==='currentlyReading'),
+          wantToRead: books.filter((book) => book.shelf==='wantToRead'),
+          read: books.filter((book) => book.shelf==='read')
+        })
       })
+  }
+
+  // updateShelf is getting update function from BooksApi and using listBookShelf
+  // to populate it with Books
+  updateShelf = (book, shelf) => {
+    console.log("inside update")
+    BooksAPI.update(book, shelf).then((books) => {
+      this.listBookShelf()
     })
   }
 
   render() {
     return (
-      <div className = "app">
-        {this.state.showSearchPage ? (
-          <SearchBooks />
-        ) : (
-        //  <ListBooks books={books} />
-        <ListBooks currentlyReading = {this.state.currentlyReading} 
-        wantToRead = {this.state.wantToRead} 
-        read = {this.state.read} 
-        onUpdateShelf = {this.updateShelf} />
-        )}
-      </div>
+        <div>
+          <Route exact path="/" render={() => (
+            <ListBooks books={this.state.books} onUpdateBook={this.updateShelf} />
+          )}/>
+
+          <Route path="/search" render={({ history }) => (
+            <SearchBooks books={this.state.books} onUpdateShelf={this.updateShelf} /> 
+          )}/>
+        </div>
+      
     )
   }
 }
 
-export default BooksApp
+export default BooksApp;
