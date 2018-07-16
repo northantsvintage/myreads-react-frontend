@@ -4,6 +4,7 @@ import Book from './Book'
 import Bookshelf from './Bookshelf';
 
 class ListBooks extends Component {
+  
   displayBooks(category) {
     const books = this.props.books
     return books.filter(book => book.shelf === category).map(book => (

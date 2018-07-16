@@ -6,16 +6,16 @@ class Book extends Component {
   }
 
   // this function needs fixing
-  bookChange(event) {
-    let shelf = event.target.value
-    this.setState({shelf})
-    this.props.onShelfChange(this.props.book, shelf)
+  bookChange = (event)=> {
+    // let shelf = event.target.value
+    this.setState({shelf: event.target.value})
+    this.props.onShelfChange(this.props.book, event.target.value)
   }
   
   render() {
     const book = this.props.book
+    console.log(this.props.book.shelf);
     return (
-
         <li>
             <div className="book">
               <div className="book-top">
