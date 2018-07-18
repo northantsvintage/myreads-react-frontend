@@ -4,6 +4,8 @@ import App from './App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 
+// BrowserRouter added for creating links
+// uses the HTML5 history, keep your UI in sync with the URL
 ReactDOM.render(
 	<BrowserRouter>
         <App />

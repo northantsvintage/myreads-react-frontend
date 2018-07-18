@@ -4,7 +4,10 @@ import './App.css'
 import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
 import { Route } from 'react-router-dom'
- 
+
+/* 
+  BookApp - Parent Component holding state
+*/
 class BooksApp extends React.Component {
   state = {
     books: [],
@@ -13,11 +16,17 @@ class BooksApp extends React.Component {
     read: []
   }
 
+ /*  immediately after a component is inserted into the dom
+      listBookShelf is called
+  */
   componentDidMount(){
     this.listBookShelf()
   }
 
-  // listBookShelf is populating changed state from API
+
+ /*  listBookShelf function makes updates to 
+      the Parent component local state
+  */
   listBookShelf(){
     BooksAPI.getAll().then((books) => {
         this.setState({ 
@@ -29,10 +38,8 @@ class BooksApp extends React.Component {
       })
   }
 
-  // updateShelf is getting update function from BooksApi and using listBookShelf
-  // to populate it with Books
+  // updateShelf is getting update function from BooksApi
   updateShelf = (book, shelf) => {
-    console.log("inside update")
     BooksAPI.update(book, shelf).then((books) => {
       this.listBookShelf()
     })
@@ -46,7 +53,7 @@ class BooksApp extends React.Component {
           )}/>
 
           <Route path="/search" render={({ history }) => (
-            <SearchBooks books={this.state.books} onUpdateShelf={this.updateShelf} /> 
+            <SearchBooks books={this.state.books} onShelfChange={this.updateShelf} /> 
           )}/>
         </div>
       

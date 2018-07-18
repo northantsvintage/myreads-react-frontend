@@ -2,26 +2,31 @@ import React, { Component } from 'react'
 
 class Book extends Component {
   state = {
-		shelf: this.props.book.shelf
+		value: this.props.book.shelf ? this.props.book.shelf : 'none'
   }
 
-  // this function needs fixing
-  bookChange = (event)=> {
-    // let shelf = event.target.value
+  bookChange = (event) => {
+
     this.setState({shelf: event.target.value})
     this.props.onShelfChange(this.props.book, event.target.value)
   }
   
   render() {
     const book = this.props.book
-    console.log(this.props.book.shelf);
+    const authors = this.props.book.authors || []
+    const thumbnail = this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : ''
+
+    const authorsList = authors.map((author) => {
+      return <div key={author}>{author}</div>
+    })
+
     return (
         <li>
             <div className="book">
               <div className="book-top">
-                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})` }}></div>
                 <div className="book-shelf-changer">
-                  <select value={this.state.shelf} onChange={this.bookChange}>
+                  <select value={this.state.value} onChange={this.bookChange}>
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
@@ -31,12 +36,11 @@ class Book extends Component {
                 </div>
               </div>
               <div className="book-title">{book.title}</div>
-              <div className="book-authors">{book.authors}</div>
+              <div className="book-authors">{authorsList}</div>
             </div>
         </li>
       )}
   }
-     
 
 
 
