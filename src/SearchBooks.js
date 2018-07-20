@@ -9,6 +9,11 @@ class SearchBooks extends Component {
     searchResults: [],
   };
 
+  /* 
+  searchBooks function connects with BooksAPI and
+  sets the state as searchResults
+  searchResults is then used in handleChange event
+  */
   searchBooks = () => {
     BooksAPI.search(this.state.value, 20)
       .then(searchResults => {
@@ -37,6 +42,10 @@ class SearchBooks extends Component {
       });
   };
 
+  /* 
+  handleChange event calls searchBooks function for search terms
+  changing the state of the app
+  */
   handleChange = event => {
     const searchTerm = event.target.value;
 
@@ -57,6 +66,7 @@ class SearchBooks extends Component {
   };
 
   render() {
+    /* bookList is the result of the search */
     const booksList =
       this.state.searchResults.length === 0
         ? <li key="no-results">No results</li>
@@ -67,7 +77,7 @@ class SearchBooks extends Component {
             </li>
           );
         });
-
+    /* it displays input search field and results of it */
     return (
       <div className="search-books">
         <div className="search-books-bar">
