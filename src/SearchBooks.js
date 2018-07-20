@@ -66,7 +66,12 @@ class SearchBooks extends Component {
   };
 
   render() {
-    /* bookList is the result of the search */
+    /* 
+    bookList is the result of the search 
+    onShelfChange comes from App.js and it is calling updateShelf
+    which communicates with BookAPI and then calls listBookShelf to
+    sets the state of books
+    */
     const booksList =
       this.state.searchResults.length === 0
         ? <li key="no-results">No results</li>

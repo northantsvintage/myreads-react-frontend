@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
-
+/* 
+this component is displaying how the book should look like and
+state of it depeneding on user choice
+*/
 class Book extends Component {
   state = {
 		value: this.props.book.shelf ? this.props.book.shelf : 'none'
   }
 
+  /* 
+  this will change the state of the shelf
+  onShelfChange comes from App.js and it is calling updateShelf
+  which communicates with BookAPI and then calls listBookShelf to
+  sets the state of books
+   */
   bookChange = (event) => {
 
     this.setState({shelf: event.target.value})

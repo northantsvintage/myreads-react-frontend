@@ -3,8 +3,14 @@ import { Link } from 'react-router-dom'
 import Book from './Book'
 import Bookshelf from './Bookshelf';
 
+/* this component is listing books on Bookshelves */
 class ListBooks extends Component {
-  
+  /* 
+  this function will  be used in Bookshelf component to display each book
+  onUpdateBook comes from App.js and it is calling updateShelf
+    which communicates with BookAPI and then calls listBookShelf to
+    sets the state of books
+  */
   displayBooks(category) {
     const books = this.props.books
     return books.filter(book => book.shelf === category).map(book => (
