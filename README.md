@@ -4,13 +4,29 @@ This is MyReads project for Udacity Front End NanoDegree
 
 ## How to run app
 
-npm install to install all the dependencies
+npm install
 
 npm start
 
 You can search for books, select which ones you want to read or which one you are currently reading or already read.
 You can perfom search and select the book you want to read, currently reading or the one you already read.
 Books will be removed from the shelf and put on the appropriate one
+
+## How to use the App
+
+With this app you manage the state of a list of books. You have the choice between: "Currently Reading", "Want to read" and "read".
+
+You can see the state of the books in the main page (path: "/").
+
+You can search for new books in the "/search" page.
+
+Arrow on the top left on the search page enables you to go back to the main page and see the result of selected choices.
+
+To make selections use the right click option to choose Reading, Want to, Read and None and books will be moved to another shelf.
+
+None allows you remove the book from each shelf.
+
+### How App works
 
 ## Backend Server
 
